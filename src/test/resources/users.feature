@@ -34,8 +34,10 @@ Feature: Cadastro de Usuários
        Then status 201
        And match response == {id: '#notnull', name : "Ronaldinho Gaúcho", email : "r10@gmail.com", password : "123456", phone : "1998765432"}
 
+       * def id = response.id
+
        Given path 'users'
-       And path response.id
+       And path id
        When method get
        Then status 200
 
@@ -50,18 +52,18 @@ Feature: Cadastro de Usuários
       """
 
        Given path 'users'
-       And path response.id
+       And path id
        And request alteraUsuario
        When method put
        Then status 200
 
        Given path 'users'
-       And path response.id
+       And path id
        When method get
        Then status 200
-       
+
        Given path 'users'
-       And path response.id
+       And path id
        When method delete
        Then status 204
 
