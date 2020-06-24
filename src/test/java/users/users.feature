@@ -4,17 +4,21 @@ Feature: Cadastro de Usuários
   * url "http://course-javatest.herokuapp.com"
 
     Scenario: Retorna todos os usuários
-      
+
+      *  def listaUsuarios = read('usuarios.json')
+
       Given path 'users'
       When method get
       Then status 200
-      
+      And match response == listaUsuarios
+
      Scenario: Retorna um usuário
        
        Given path 'users'
        And path 6
        When method get
        Then status 200
+       And match response == {"id": 6, "name": "Lyn Heaney", "email": "heaney_lyn@hotmail.com", "phone": "+994 1-269-626-6007 x3795", "password": "12345678"}
 
      Scenario: Cadastrando um usuário
 
